@@ -5,30 +5,31 @@ import random
 
 print ("Are you ready to play?")
 
-def factorial(n):
-    return n * factorial(n-1)
-
 def id_generator(size=9, chars=string.ascii_uppercase):
     return ''.join(random.SystemRandom().choice(string.ascii_uppercase) for _ in range(size))
 
+
 s = id_generator()    
+"""jumbleSort = ''.join(sorted(s))"""
+jumbleSort = ''.join(sorted("abalienation"))
 
-"""print (s)"""
+print (s)
+print (jumbleSort)
 
-while factorial(9):
-    if s not in list:
-        continue
-    else:
-        s = (random.sample(word, len(word)))
-        list = []
-        list.append(s)
 
-print (list)
+def compare(ch, text): 
+    numAppears = 0
+    for t in text:
+        if t == ch:
+            numAppears += 1
+    return numAppears
 
 with open('wordlist.txt','r') as f:
     for line in f:
         for word in line.split():
-            if word not in s:
-                continue
-            else: 
-                print(word)
+            dic = ''.join(sorted(word))
+            matches = compare(dic, jumbleSort);
+            if matches > 3:
+                print (word)
+            else:
+            	continue
