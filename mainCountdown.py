@@ -3,13 +3,15 @@ import time
 import string
 
 
-"""with open('wordlist.txt','r') as f:"""
+#with open('wordlist.txt','r') as f:
+#open the .txt files
 f = open('wordList.txt', 'r')
 v = open ('vouls.txt', 'r')
 c= open ('cons.txt', 'r')
-jumbleSort = ' '
-jumble = ''
 
+# This method takes 4 random strings from a .txt file containing all the vouls
+# and 5 random strings from a .txt file containg constanents. The strings are joined and organised 
+# alphabetically.
 def jumbler():
     wordsList = []
     for i in range(0, 4):
@@ -32,36 +34,34 @@ def jumbler():
     wordJumble = ''.join(sorted(wordJumble))
     print(wordJumble)
     return wordJumble
-##print (jumbleSort)
 
-def compare(ch, text): 
-    numAppears = 0
-    for t in text:
-        if t == ch:
-            numAppears += 1
-    return numAppears
+#This method was to originaly compare the unorganised strings but decided to go with 
+#the solved method instead.
+#def compare(ch, text): 
+ #   numAppears = 0
+  #  for t in text:
+   #     if t == ch:
+    #        numAppears += 1
+    #return numAppears
 
+#simple method that compares two strings when they are arranged alphabetically
+#if there are more than 2 matching characters the unordered word is aded to the solution[] list.
 def solved(jumbleSort):
-
     solution = []
     for line in f:
         for word in line.split():
-            if word in jumbleSort:
+            sort = ''.join(sorted(word))
+            if sort in jumbleSort:
             	if(len(word) > 2):
                     solution.append(word)
-                    print('checking.....')
+                   
             else:
         	    continue
     return solution
 
 start_time = time.time()
 
-#anagrams = solved(jumbleSort)
 
-##print("Result:", anagrams)
-##print("Solved in %s seconds" % (time.time() - start_time))
-
-userInput = ''
 temprompt = None
 
 if (temprompt == None):
@@ -71,6 +71,7 @@ if (temprompt == None):
     if ('yes' in var):
         mixer = jumbler()
         done = solved(mixer)
+        print('All possible solutions')
         print(done)
         temprompt
         print("Solved in %s seconds" % (time.time() - start_time))
@@ -79,6 +80,3 @@ if(temprompt):
     if ('If you already have the letters lets solve it: Yes' in var):
         solved(mixer)
 
-    #jumble = jumbler()
-
-    #jumbleSort = ''.join(sorted(jumble))
