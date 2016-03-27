@@ -10,6 +10,7 @@ v = open ('vouls.txt', 'r')
 c= open ('cons.txt', 'r')
 
 wordList = []
+counter = 0
 
 # This method takes 4 random strings from a .txt file containing all the vouls
 # and 5 random strings from a .txt file containg constanents. The strings are joined and organised 
@@ -30,19 +31,19 @@ def jumbler():
         word = conLines[con]
         wordsList.insert(x, word)
 
-    wordJumble = ''.join(wordList)  
+    wordJumble =''.join(wordList)  
     #print(wordJumble)
-    wordJumble = ''.join(sorted(wordJumble))
+    wordJumble =''.join(sorted(wordJumble))
     print(wordJumble)
     return wordJumble
 
 def getVoul():
-    voul = randint(0, 4)
+    voul = randint(0, 3)
     v = open ('vouls.txt')
     lines=v.readlines()
     word = lines[voul]
     wordList.append(word)
-    wordJumble = ''.join(wordList)  
+    wordJumble =''.join(wordList)  
     return 
 
 def getConstenent():
@@ -84,41 +85,48 @@ voulCount = 0
 conCount = 0
 
 while (temprompt == None): 
-    var = input("What would you like to do? Select or Solve: ")
+    var = raw_input("What would you like to do? Select or Solve: ")
   #  if ('Jumble' in var): 
    #     mixer = jumbler() 
     #    done = solved(mixer)
      #   solved(mixer)   
       #  selected
-    if('Solve' in var):
+    if("Solve" in var):
+        wordJumble =''.join(sorted(wordJumble))
         start_time = time.time()
         done = solved(wordJumble)
         print('All possible solutions')
         print(done)
         print("Solved in %s seconds" % (time.time() - start_time))
         temprompt
-        wordJumble = " "
+        wordJumble = ""
+        selected = None
 
     while(selected == None):
 
-        if('Select' in var):
-            letter = input("Would you like a voul(V) or constanent (C)")
+        if("Select" in var):
+            letter = raw_input("Would you like a voul(V) or constanent (C)")
 
         if('V' in letter):
             if(voulCount < 4):
                 getVoul()
                 voulCount += 1
-                wordJumble = ''.join(wordList)  
-                wordJumble = ''.join(sorted(wordJumble))
+                wordJumble =''.join(wordList)  
+                #wordJumble =''.join(sorted(wordJumble))
                 print(wordJumble)
-            else: selected = True
+                counter+=1
+            else:letter = 'C';
 
         if('C' in letter, conCount < 5):
             if(conCount < 5):
                 getConstenent()
                 conCount += 1
-                wordJumble = ''.join(wordList)  
-                wordJumble = ''.join(sorted(wordJumble))
+                wordJumble =''.join(wordList)  
+                #wordJumble =''.join(sorted(wordJumble))
                 print(wordJumble)
-            else: selected = True
+                counter+=1
+            else:letter = 'V';
+			
+        if(counter > 8):
+            selected = True;
     
